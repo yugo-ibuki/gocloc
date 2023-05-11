@@ -15,8 +15,7 @@ const defaultOutputSeparator string = "-----------------------------------------
 
 var rowLen = 79
 
-// CmdOptions is gocloc command options.
-// It is necessary to use notation that follows go-flags.
+// It is necessary to use  that follows go-flags.
 type CmdOptions struct {
 	Byfile   bool   `long:"by-file" description:"report results for every encountered source file"`
 	MatchDir string `long:"match-d" description:"include dir name (regex)"`
@@ -46,16 +45,9 @@ func (o *outputBuilder) WriteHeader() {
 
 func (o *outputBuilder) WriteFooter() {
 	total := o.result.Total
-	maxPathLen := o.result.MaxPathLength
-
 	fmt.Printf("%.[2]*[1]s\n", defaultOutputSeparator, rowLen)
-	if o.opts.Byfile {
-		fmt.Printf("%-[1]*[2]v %6[3]v %14[4]v %14[5]v %14[6]v\n",
-			maxPathLen, "TOTAL", total.Total, total.Blanks, total.Comments, total.Code)
-	} else {
-		fmt.Printf("%-27v %6v %14v %14v %14v\n",
-			"TOTAL", total.Total, total.Blanks, total.Comments, total.Code)
-	}
+	fmt.Printf("%-27v %6v %14v %14v %14v\n",
+		"TOTAL", total.Total, total.Blanks, total.Comments, total.Code)
 	fmt.Printf("%.[2]*[1]s\n", defaultOutputSeparator, rowLen)
 }
 
